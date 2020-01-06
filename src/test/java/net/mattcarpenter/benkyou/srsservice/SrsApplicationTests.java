@@ -1,4 +1,4 @@
-package net.mattcarpenter.benkyou.srs;
+package net.mattcarpenter.benkyou.srsservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

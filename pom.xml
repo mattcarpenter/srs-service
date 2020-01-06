@@ -6,13 +6,13 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>net.mattcarpenter.benkyou</groupId>
-	<artifactId>srs</artifactId>
+	<artifactId>srs-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>srs</name>
+	<name>SRS Service</name>
 	<description>SRS Service</description>
 
 	<properties>

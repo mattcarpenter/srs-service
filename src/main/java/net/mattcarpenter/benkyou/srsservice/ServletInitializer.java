@@ -1,4 +1,4 @@
-package net.mattcarpenter.benkyou.srs;
+package net.mattcarpenter.benkyou.srsservice;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

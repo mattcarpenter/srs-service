@@ -1,0 +1,1 @@
+http://www.thinkcode.se/blog/2014/09/20/making-life-easier-with-a-multi-module-maven-project

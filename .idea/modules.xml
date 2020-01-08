@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/srs.iml" filepath="$PROJECT_DIR$/srs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Service/srs-service.iml" filepath="$PROJECT_DIR$/Service/srs-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/srs-service-parent.iml" filepath="$PROJECT_DIR$/srs-service-parent.iml" />
     </modules>
   </component>
 </project>

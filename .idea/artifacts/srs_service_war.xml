@@ -1,14 +1,14 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="srs:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
+  <artifact type="war" name="srs-service:war">
+    <output-path>$PROJECT_DIR$/Service/target</output-path>
     <properties id="maven-jee-properties">
       <options>
-        <module>srs</module>
+        <module>srs-service</module>
         <packaging>war</packaging>
       </options>
     </properties>
     <root id="archive" name="srs-service-0.0.1-SNAPSHOT.war">
-      <element id="artifact" artifact-name="srs:war exploded" />
+      <element id="artifact" artifact-name="srs-service:war exploded" />
     </root>
   </artifact>
 </component>

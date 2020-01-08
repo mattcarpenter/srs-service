@@ -32,9 +32,9 @@ public class ContentController {
     }
 
     @PostMapping("/item")
-    public String createItem(@RequestBody Item item) {
+    public Item createItem(@RequestBody Item item) {
         itemService.createItem(item);
-        return "todo";
+        return item;
     }
 
     @GetMapping("/deck/{id}")

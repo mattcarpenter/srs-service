@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Item extends EntityWithUUID {
     private UUID createdBy;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_field"))
     private List<Field> fields;
 }

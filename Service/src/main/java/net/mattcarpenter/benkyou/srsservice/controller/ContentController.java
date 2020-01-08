@@ -1,8 +1,9 @@
-package net.mattcarpenter.benkyou.srsservice.controller.content;
+package net.mattcarpenter.benkyou.srsservice.controller;
 
 import net.mattcarpenter.benkyou.srsservice.entity.Card;
 import net.mattcarpenter.benkyou.srsservice.entity.Deck;
 import net.mattcarpenter.benkyou.srsservice.entity.Item;
+import net.mattcarpenter.benkyou.srsservice.model.AddCardsToDeckRequest;
 import net.mattcarpenter.benkyou.srsservice.model.CreateCardRequest;
 import net.mattcarpenter.benkyou.srsservice.service.CardService;
 import net.mattcarpenter.benkyou.srsservice.service.DeckService;
@@ -26,30 +27,45 @@ public class ContentController {
         this.cardService = cardService;
     }
 
-    @GetMapping("/item/{id}")
-    public Item getItemById(@PathVariable String id) {
-        return itemService.getItem(UUID.fromString(id));
-    }
-
-    @GetMapping("/item")
+    @GetMapping("/items")
     public List<Item> getAllItems() {
         return itemService.getAllItems();
     }
 
-    @PostMapping("/item")
+    @GetMapping("/items/{id}")
+    public Item getItemById(@PathVariable String id) {
+        return itemService.getItem(UUID.fromString(id));
+    }
+
+    @PostMapping("/items")
     public Item createItem(@RequestBody Item item) {
         itemService.createItem(item);
         return item;
     }
 
-    @GetMapping("/deck/{id}")
+    @GetMapping("/cards/{id}")
+    public Card getCard(@PathVariable String id) {
+        return cardService.getCard(UUID.fromString(id));
+    }
+
+    @PostMapping("/cards")
+    public Card createCard(@RequestBody CreateCardRequest createCardRequest) {
+        return cardService.createCard(createCardRequest.getItemId(), createCardRequest.getFrontFieldId(),
+                createCardRequest.getBackFieldId());
+    }
+
+    @GetMapping("/decks")
+    public List<Deck> getAllDecks() {
+        return deckService.getAllDecks();
+    }
+
+    @GetMapping("/decks/{id}")
     public Deck getDeck(@PathVariable String id) {
         return deckService.getDeck(UUID.fromString(id));
     }
 
-    @PostMapping("/card")
-    public Card createCard(@RequestBody CreateCardRequest createCardRequest) {
-        return cardService.createCard(createCardRequest.getItemId(), createCardRequest.getFrontFieldId(),
-                createCardRequest.getBackFieldId());
+    @PostMapping("/decks/{id}/cards")
+    public void addCardsToDeck(@PathVariable String id, @RequestBody AddCardsToDeckRequest addCardsToDeckRequest) {
+        deckService.addCardsToDeck(UUID.fromString(id), addCardsToDeckRequest.getCardIds());
     }
 }

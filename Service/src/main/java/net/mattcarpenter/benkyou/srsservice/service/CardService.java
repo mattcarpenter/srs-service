@@ -36,4 +36,8 @@ public class CardService {
 
         return card;
     }
+
+    public Card getCard(UUID id) {
+        return cardDao.findById(id).orElseThrow();
+    }
 }

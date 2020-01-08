@@ -2,6 +2,7 @@ package net.mattcarpenter.benkyou.srsservice.controller;
 
 import net.mattcarpenter.benkyou.srsservice.entity.Item;
 import net.mattcarpenter.benkyou.srsservice.service.ItemService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,7 @@ public class ContentController {
         this.itemService = itemService;
     }
 
-    @RequestMapping("/item/{id}")
+    @GetMapping("/item/{id}")
     public Item getItemById(HttpServletRequest request, @PathVariable String id) {
         return itemService.getItem(UUID.fromString(id));
     }

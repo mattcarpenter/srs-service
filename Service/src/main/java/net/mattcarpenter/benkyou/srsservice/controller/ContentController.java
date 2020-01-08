@@ -2,12 +2,9 @@ package net.mattcarpenter.benkyou.srsservice.controller;
 
 import net.mattcarpenter.benkyou.srsservice.entity.Item;
 import net.mattcarpenter.benkyou.srsservice.service.ItemService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -21,7 +18,18 @@ public class ContentController {
     }
 
     @GetMapping("/item/{id}")
-    public Item getItemById(HttpServletRequest request, @PathVariable String id) {
+    public Item getItemById(@PathVariable String id) {
         return itemService.getItem(UUID.fromString(id));
+    }
+
+    @GetMapping("/item")
+    public List<Item> getAllItems() {
+        return itemService.getAllItems();
+    }
+
+    @PostMapping("/item")
+    public String createItem(@RequestBody Item item) {
+        itemService.createItem(item);
+        return "todo";
     }
 }

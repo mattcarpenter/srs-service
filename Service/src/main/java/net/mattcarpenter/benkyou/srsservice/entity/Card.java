@@ -1,5 +1,6 @@
 package net.mattcarpenter.benkyou.srsservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class Card extends EntityWithUUID {
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_item"))
+    @JsonIgnore
     private Item item;
 
     @ManyToOne

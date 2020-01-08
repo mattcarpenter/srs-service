@@ -5,7 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Data;
 import net.mattcarpenter.benkyou.srsservice.entity.util.EntityWithUUID;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,4 +15,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Item extends EntityWithUUID {
     private UUID createdBy;
+
+    @OneToMany
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_field"))
+    private List<Field> fields;
 }

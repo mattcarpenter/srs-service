@@ -1,5 +1,6 @@
 package net.mattcarpenter.benkyou.srsservice.entity;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -23,11 +24,7 @@ public class Field extends EntityWithUUID {
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private String data;
+    private JsonNode data;
 
     private UUID createdBy;
-
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_field_item"))
-    private Item item;
 }

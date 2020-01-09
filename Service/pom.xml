@@ -6,7 +6,6 @@
 		<groupId>net.mattcarpenter.benkyou</groupId>
 		<artifactId>srs-service-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/>
 	</parent>
 	<groupId>net.mattcarpenter.benkyou</groupId>
 	<artifactId>srs-service</artifactId>

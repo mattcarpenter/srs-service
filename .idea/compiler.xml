@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="srs-service-functional-tests" />
         <module name="srs-service" />
+        <module name="srs-service-functional-tests" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

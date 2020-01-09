@@ -3,8 +3,8 @@ package net.mattcarpenter.benkyou.srsservice.service;
 import com.google.common.collect.Lists;
 import net.mattcarpenter.benkyou.srsservice.dao.CardDao;
 import net.mattcarpenter.benkyou.srsservice.dao.DeckDao;
-import net.mattcarpenter.benkyou.srsservice.entity.Card;
-import net.mattcarpenter.benkyou.srsservice.entity.Deck;
+import net.mattcarpenter.benkyou.srsservice.entity.CardEntity;
+import net.mattcarpenter.benkyou.srsservice.entity.DeckEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,20 +20,20 @@ public class DeckService {
         this.cardDao = cardDao;
     }
 
-   public Deck getDeck(UUID id) {
+   public DeckEntity getDeck(UUID id) {
         return deckDao.findById(id).orElseThrow();
    }
 
-   public List<Deck> getAllDecks() {
+   public List<DeckEntity> getAllDecks() {
         return Lists.newArrayList(deckDao.findAll());
    }
 
    public void addCardsToDeck(UUID deckId, List<UUID> cardIds) {
-        Deck deck = deckDao.findById(deckId).orElseThrow();
+        DeckEntity deckEntity = deckDao.findById(deckId).orElseThrow();
         cardIds.forEach(id -> {
-            Card card = cardDao.findById(id).orElseThrow();
-            deck.addCard(card);
+            CardEntity cardEntity = cardDao.findById(id).orElseThrow();
+            deckEntity.addCard(cardEntity);
         });
-        deckDao.save(deck);
+        deckDao.save(deckEntity);
    }
 }

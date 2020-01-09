@@ -5,18 +5,16 @@ import net.mattcarpenter.benkyou.srsservice.dao.CardDao;
 import net.mattcarpenter.benkyou.srsservice.dao.DeckDao;
 import net.mattcarpenter.benkyou.srsservice.dao.ItemDao;
 import net.mattcarpenter.benkyou.srsservice.dao.FieldDao;
-import net.mattcarpenter.benkyou.srsservice.entity.Card;
-import net.mattcarpenter.benkyou.srsservice.entity.Deck;
-import net.mattcarpenter.benkyou.srsservice.entity.Item;
-import net.mattcarpenter.benkyou.srsservice.entity.Field;
+import net.mattcarpenter.benkyou.srsservice.entity.CardEntity;
+import net.mattcarpenter.benkyou.srsservice.entity.DeckEntity;
+import net.mattcarpenter.benkyou.srsservice.entity.ItemEntity;
+import net.mattcarpenter.benkyou.srsservice.entity.FieldEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 @Service
 public class DataFillerService {
@@ -38,40 +36,40 @@ public class DataFillerService {
         ObjectMapper mapper = new ObjectMapper();
 
         // Create an item and fields
-        Item item = new Item();
-        Field field1 = new Field();
-        Field field2 = new Field();
-        field1.setData(mapper.readTree("{\"value\":\"eng\"}"));
-        field2.setData(mapper.readTree("{\"value\":\"ひらがな\"}"));
-        List<Field> fields = new ArrayList<>();
-        fieldDao.save(field1);
-        fieldDao.save(field2);
-        fields.add(field1);
-        fields.add(field2);
-        item.setFields(fields);
-        itemDao.save(item);
+        ItemEntity itemEntity = new ItemEntity();
+        FieldEntity fieldEntity1 = new FieldEntity();
+        FieldEntity fieldEntity2 = new FieldEntity();
+        fieldEntity1.setData(mapper.readTree("{\"value\":\"eng\"}"));
+        fieldEntity2.setData(mapper.readTree("{\"value\":\"ひらがな\"}"));
+        List<FieldEntity> fieldEntities = new ArrayList<>();
+        fieldDao.save(fieldEntity1);
+        fieldDao.save(fieldEntity2);
+        fieldEntities.add(fieldEntity1);
+        fieldEntities.add(fieldEntity2);
+        itemEntity.setFieldEntities(fieldEntities);
+        itemDao.save(itemEntity);
 
         // Create a card
-        Card card = new Card();
-        card.setBackField(field2);
-        card.setFrontField(field1);
-        card.setItem(item);
-        cardDao.save(card);
+        CardEntity cardEntity = new CardEntity();
+        cardEntity.setBackFieldEntity(fieldEntity2);
+        cardEntity.setFrontFieldEntity(fieldEntity1);
+        cardEntity.setItemEntity(itemEntity);
+        cardDao.save(cardEntity);
 
         // Create another card
-        Card card2 = new Card();
-        card2.setBackField(field2);
-        card2.setFrontField(field1);
-        card2.setItem(item);
-        cardDao.save(card2);
+        CardEntity cardEntity2 = new CardEntity();
+        cardEntity2.setBackFieldEntity(fieldEntity2);
+        cardEntity2.setFrontFieldEntity(fieldEntity1);
+        cardEntity2.setItemEntity(itemEntity);
+        cardDao.save(cardEntity2);
 
         System.out.println("\n\n\n\n\n-------------------------------------------\n\n\n\n\n");
 
         // Create a deck
-        Deck deck = new Deck();
-        deck.addCard(card);
-        deck.addCard(card2);
-        deckDao.save(deck);
+        DeckEntity deckEntity = new DeckEntity();
+        deckEntity.addCard(cardEntity);
+        deckEntity.addCard(cardEntity2);
+        deckDao.save(deckEntity);
 
         System.out.println("\n\n\n\n\n-------------------------------------------\n\n\n\n\n");
     }

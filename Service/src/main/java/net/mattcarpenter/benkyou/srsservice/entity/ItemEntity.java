@@ -9,14 +9,14 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "Item")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Item extends EntityWithUUID {
+public class ItemEntity extends EntityWithUUID {
     private UUID createdBy;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_field"))
-    private List<Field> fields;
+    private List<FieldEntity> fieldEntities;
 }

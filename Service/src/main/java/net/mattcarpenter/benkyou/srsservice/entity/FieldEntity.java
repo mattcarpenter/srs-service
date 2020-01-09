@@ -12,7 +12,7 @@ import org.hibernate.annotations.TypeDef;
 import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "Field")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +20,7 @@ import java.util.UUID;
         name = "jsonb",
         typeClass = JsonBinaryType.class
 )
-public class Field extends EntityWithUUID {
+public class FieldEntity extends EntityWithUUID {
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")

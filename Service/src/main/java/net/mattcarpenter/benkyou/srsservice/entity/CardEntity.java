@@ -8,22 +8,22 @@ import net.mattcarpenter.benkyou.srsservice.entity.util.EntityWithUUID;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "Card")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card extends EntityWithUUID {
+public class CardEntity extends EntityWithUUID {
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_item"))
     @JsonIgnore
-    private Item item;
+    private ItemEntity itemEntity;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_frontitemfield"))
-    private Field frontField;
+    private FieldEntity frontFieldEntity;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_backitemfield"))
-    private Field backField;
+    private FieldEntity backFieldEntity;
 }

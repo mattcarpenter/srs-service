@@ -3,9 +3,9 @@ package net.mattcarpenter.benkyou.srsservice.service;
 import net.mattcarpenter.benkyou.srsservice.dao.CardDao;
 import net.mattcarpenter.benkyou.srsservice.dao.FieldDao;
 import net.mattcarpenter.benkyou.srsservice.dao.ItemDao;
-import net.mattcarpenter.benkyou.srsservice.entity.Card;
-import net.mattcarpenter.benkyou.srsservice.entity.Field;
-import net.mattcarpenter.benkyou.srsservice.entity.Item;
+import net.mattcarpenter.benkyou.srsservice.entity.CardEntity;
+import net.mattcarpenter.benkyou.srsservice.entity.FieldEntity;
+import net.mattcarpenter.benkyou.srsservice.entity.ItemEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -23,21 +23,21 @@ public class CardService {
         this.itemDao = itemDao;
     }
 
-    public Card createCard(UUID itemId, UUID frontFieldId, UUID backFieldId) {
-        Field frontField = fieldDao.findById(frontFieldId).orElseThrow();
-        Field backField = fieldDao.findById(backFieldId).orElseThrow();
-        Item item = itemDao.findById(itemId).orElseThrow();
+    public CardEntity createCard(UUID itemId, UUID frontFieldId, UUID backFieldId) {
+        FieldEntity frontFieldEntity = fieldDao.findById(frontFieldId).orElseThrow();
+        FieldEntity backFieldEntity = fieldDao.findById(backFieldId).orElseThrow();
+        ItemEntity itemEntity = itemDao.findById(itemId).orElseThrow();
 
-        Card card = new Card();
-        card.setItem(item);
-        card.setFrontField(frontField);
-        card.setBackField(backField);
-        cardDao.save(card);
+        CardEntity cardEntity = new CardEntity();
+        cardEntity.setItemEntity(itemEntity);
+        cardEntity.setFrontFieldEntity(frontFieldEntity);
+        cardEntity.setBackFieldEntity(backFieldEntity);
+        cardDao.save(cardEntity);
 
-        return card;
+        return cardEntity;
     }
 
-    public Card getCard(UUID id) {
+    public CardEntity getCard(UUID id) {
         return cardDao.findById(id).orElseThrow();
     }
 }

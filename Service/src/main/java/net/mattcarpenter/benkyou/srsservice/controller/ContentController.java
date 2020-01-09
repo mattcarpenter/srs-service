@@ -1,15 +1,17 @@
 package net.mattcarpenter.benkyou.srsservice.controller;
 
-import net.mattcarpenter.benkyou.srsservice.entity.Card;
-import net.mattcarpenter.benkyou.srsservice.entity.Deck;
-import net.mattcarpenter.benkyou.srsservice.entity.Item;
-import net.mattcarpenter.benkyou.srsservice.model.AddCardsToDeckRequest;
-import net.mattcarpenter.benkyou.srsservice.model.CreateCardRequest;
+import net.mattcarpenter.benkyou.srsservice.entity.CardEntity;
+import net.mattcarpenter.benkyou.srsservice.entity.DeckEntity;
+import net.mattcarpenter.benkyou.srsservice.entity.ItemEntity;
+import net.mattcarpenter.benkyou.srsservice.mapper.EntityToModelMapper;
+import net.mattcarpenter.benkyou.srsservice.model.*;
 import net.mattcarpenter.benkyou.srsservice.service.CardService;
 import net.mattcarpenter.benkyou.srsservice.service.DeckService;
 import net.mattcarpenter.benkyou.srsservice.service.ItemService;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,39 +30,43 @@ public class ContentController {
     }
 
     @GetMapping("/items")
-    public List<Item> getAllItems() {
-        return itemService.getAllItems();
+    public AllItemsResponse getAllItems() {
+        List<ItemModel> items = new ArrayList<>();
+        itemService.getAllItems().forEach(itemEntity -> items.add(EntityToModelMapper.mapToItemModel(itemEntity)));
+        return new AllItemsResponse(items);
     }
 
     @GetMapping("/items/{id}")
-    public Item getItemById(@PathVariable String id) {
+    public ItemEntity getItemById(@PathVariable String id) {
         return itemService.getItem(UUID.fromString(id));
     }
 
     @PostMapping("/items")
-    public Item createItem(@RequestBody Item item) {
-        itemService.createItem(item);
-        return item;
+    public ItemEntity createItem(@RequestBody ItemEntity itemEntity) {
+        itemService.createItem(itemEntity);
+        return itemEntity;
     }
 
     @GetMapping("/cards/{id}")
-    public Card getCard(@PathVariable String id) {
+    public CardEntity getCard(@PathVariable String id) {
         return cardService.getCard(UUID.fromString(id));
     }
 
     @PostMapping("/cards")
-    public Card createCard(@RequestBody CreateCardRequest createCardRequest) {
+    public CardEntity createCard(@RequestBody CreateCardRequest createCardRequest) {
         return cardService.createCard(createCardRequest.getItemId(), createCardRequest.getFrontFieldId(),
                 createCardRequest.getBackFieldId());
     }
 
     @GetMapping("/decks")
-    public List<Deck> getAllDecks() {
-        return deckService.getAllDecks();
+    public AllDecksResponse getAllDecks() {
+        List<DeckModel> decks = new ArrayList<>();
+        deckService.getAllDecks().forEach(deckEntity -> decks.add(EntityToModelMapper.mapToDeckModel(deckEntity)));
+        return new AllDecksResponse(decks);
     }
 
     @GetMapping("/decks/{id}")
-    public Deck getDeck(@PathVariable String id) {
+    public DeckEntity getDeck(@PathVariable String id) {
         return deckService.getDeck(UUID.fromString(id));
     }
 

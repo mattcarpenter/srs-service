@@ -66,5 +66,13 @@ public class DeckServiceTests {
         assertThat(captor.getValue().getId()).isEqualTo(deck.getId());
         assertThat(captor.getValue().getCardEntities().size()).isEqualTo(2);
     }
+
+    @Test
+    public void createDeck_ok() {
+        ArgumentCaptor<DeckEntity> captor = ArgumentCaptor.forClass(DeckEntity.class);
+        deckService.createDeck("Test deck");
+        verify(deckDao).save(captor.capture());
+        assertThat(captor.getValue().getTitle()).isEqualTo("Test deck");
+    }
 }
 

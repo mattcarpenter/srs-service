@@ -71,6 +71,11 @@ public class ContentController {
         return new AllDecksResponse(decks);
     }
 
+    @PostMapping("/decks")
+    public DeckEntity createDeck(@RequestBody CreateDeckRequest createDeckRequest) {
+        return deckService.createDeck(createDeckRequest.getTitle());
+    }
+
     @GetMapping("/decks/{id}")
     public DeckEntity getDeck(@PathVariable String id) {
         return deckService.getDeck(UUID.fromString(id));

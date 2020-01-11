@@ -36,4 +36,11 @@ public class DeckService {
         });
         deckDao.save(deckEntity);
    }
+
+   public DeckEntity createDeck(String title) {
+        DeckEntity deck = new DeckEntity();
+        deck.setTitle(title);
+        deckDao.save(deck);
+        return deck;
+   }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/content")
@@ -30,8 +31,11 @@ public class ContentController {
 
     @GetMapping("/items")
     public AllItemsResponse getAllItems() {
-        List<ItemModel> items = new ArrayList<>();
-        itemService.getAllItems().forEach(itemEntity -> items.add(EntityToModelMapper.mapToItemModel(itemEntity)));
+        List<ItemModel> items = itemService.getAllItems()
+                .stream()
+                .map(EntityToModelMapper::mapToItemModel)
+                .collect(Collectors.toList());
+
         return new AllItemsResponse(items);
     }
 
@@ -59,8 +63,11 @@ public class ContentController {
 
     @GetMapping("/decks")
     public AllDecksResponse getAllDecks() {
-        List<DeckModel> decks = new ArrayList<>();
-        deckService.getAllDecks().forEach(deckEntity -> decks.add(EntityToModelMapper.mapToDeckModel(deckEntity)));
+        List<DeckModel> decks = deckService.getAllDecks()
+                .stream()
+                .map(EntityToModelMapper::mapToDeckModel)
+                .collect(Collectors.toList());
+
         return new AllDecksResponse(decks);
     }
 

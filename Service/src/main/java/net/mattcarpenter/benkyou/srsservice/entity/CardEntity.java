@@ -7,6 +7,7 @@ import lombok.Data;
 import net.mattcarpenter.benkyou.srsservice.entity.util.EntityWithUUID;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity(name = "Card")
 @Data
@@ -26,4 +27,6 @@ public class CardEntity extends EntityWithUUID {
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_backitemfield"))
     private FieldEntity backFieldEntity;
+
+    private UUID createdBy;
 }

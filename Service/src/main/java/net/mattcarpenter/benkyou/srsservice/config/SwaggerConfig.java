@@ -1,4 +1,4 @@
-package net.mattcarpenter.benkyou.srsservice.configuration;
+package net.mattcarpenter.benkyou.srsservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

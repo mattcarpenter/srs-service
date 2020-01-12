@@ -46,17 +46,12 @@ public class CardServiceTests {
     }
 
     @Test
-    public void createCard_createsCard() throws Exception {
+    public void createCard_createsCard() {
         ArgumentCaptor<CardEntity> captor = ArgumentCaptor.forClass(CardEntity.class);
-
         ItemEntity itemEntity = new ItemEntity();
-
         when(itemDao.findById(itemEntity.getId())).thenReturn(Optional.of(itemEntity));
-
         cardService.createCard(itemEntity.getId());
-
         verify(cardDao).save(captor.capture());
-
         assertThat(captor.getValue().getItemEntity().getId()).isEqualTo(itemEntity.getId());
     }
 }

@@ -14,6 +14,8 @@ import java.util.UUID;
 @Data
 public class CardEntity {
 
+    // HashSet will not store 2+ CardEntities unless we either define id on this class (instead of extending
+    // EntityWithUUID) or overriding Equals and HashCode.
     @Id
     @Type(type = "pg-uuid")
     private UUID id = UUID.randomUUID();

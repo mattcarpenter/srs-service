@@ -53,10 +53,6 @@ public class DeckServiceTests {
         CardEntity card2 = new CardEntity();
         DeckEntity deck = new DeckEntity();
 
-        // needed otherwise the Deck's HashSet for cards will consider card 1 and 2 the same
-        card1.setCreatedBy(UUID.randomUUID());
-        card2.setCreatedBy(UUID.randomUUID());
-
         when(deckDao.findById(deck.getId())).thenReturn(Optional.of(deck));
         when(cardDao.findById(card1.getId())).thenReturn(Optional.of(card1));
         when(cardDao.findById(card2.getId())).thenReturn(Optional.of(card2));

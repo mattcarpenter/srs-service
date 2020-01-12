@@ -7,7 +7,7 @@ import net.mattcarpenter.benkyou.srsservice.model.ItemModel;
 
 public class EntityToModelMapper {
     public static ItemModel mapToItemModel(ItemEntity entity) {
-        return new ItemModel(entity.getId(), entity.getCreatedBy());
+        return new ItemModel(entity.getId(), entity.getCreatedBy(), entity.getData());
     }
 
     public static DeckModel mapToDeckModel(DeckEntity entity) {

@@ -50,6 +50,11 @@ public class ContentController {
         return itemEntity;
     }
 
+    @GetMapping("/cards")
+    public AllCardsResponse getAllCards() {
+        return new AllCardsResponse(cardService.getAllCards());
+    }
+
     @GetMapping("/cards/{id}")
     public CardEntity getCard(@PathVariable String id) {
         return cardService.getCard(UUID.fromString(id));
@@ -57,8 +62,7 @@ public class ContentController {
 
     @PostMapping("/cards")
     public CardEntity createCard(@RequestBody CreateCardRequest createCardRequest) {
-        return cardService.createCard(createCardRequest.getItemId(), createCardRequest.getFrontFieldId(),
-                createCardRequest.getBackFieldId());
+        return cardService.createCard(createCardRequest.getItemId());
     }
 
     @GetMapping("/decks")

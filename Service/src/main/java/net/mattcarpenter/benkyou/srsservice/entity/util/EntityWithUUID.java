@@ -12,7 +12,7 @@ public class EntityWithUUID {
 
     @Id
     @Type(type = "pg-uuid")
-    private UUID id;
+    public UUID id;
 
     public EntityWithUUID() {
         this.id = UUID.randomUUID();

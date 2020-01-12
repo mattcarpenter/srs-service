@@ -5,28 +5,22 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 import net.mattcarpenter.benkyou.srsservice.entity.util.EntityWithUUID;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity(name = "Card")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class CardEntity extends EntityWithUUID {
+public class CardEntity {
+
+    @Id
+    @Type(type = "pg-uuid")
+    private UUID id = UUID.randomUUID();
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_item"))
-    @JsonIgnore
     private ItemEntity itemEntity;
-
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_frontitemfield"))
-    private FieldEntity frontFieldEntity;
-
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_backitemfield"))
-    private FieldEntity backFieldEntity;
 
     private UUID createdBy;
 }

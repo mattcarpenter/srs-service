@@ -10,7 +10,6 @@ import net.mattcarpenter.benkyou.srsservice.service.DeckService;
 import net.mattcarpenter.benkyou.srsservice.service.ItemService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -86,7 +85,8 @@ public class ContentController {
     }
 
     @PostMapping("/decks/{id}/cards")
-    public void addCardsToDeck(@PathVariable String id, @RequestBody AddCardsToDeckRequest addCardsToDeckRequest) {
+    public DeckEntity addCardsToDeck(@PathVariable String id, @RequestBody AddCardsToDeckRequest addCardsToDeckRequest) {
         deckService.addCardsToDeck(UUID.fromString(id), addCardsToDeckRequest.getCardIds());
+        return deckService.getDeck(UUID.fromString(id));
     }
 }

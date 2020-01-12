@@ -1,6 +1,5 @@
 package net.mattcarpenter.benkyou.srsservice.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import net.mattcarpenter.benkyou.srsservice.dao.CardDao;
 import net.mattcarpenter.benkyou.srsservice.dao.FieldDao;
 import net.mattcarpenter.benkyou.srsservice.dao.ItemDao;

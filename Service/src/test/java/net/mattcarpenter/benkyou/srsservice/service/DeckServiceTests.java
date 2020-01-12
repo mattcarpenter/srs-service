@@ -1,6 +1,5 @@
 package net.mattcarpenter.benkyou.srsservice.service;
 
-import com.google.common.collect.Lists;
 import net.mattcarpenter.benkyou.srsservice.dao.CardDao;
 import net.mattcarpenter.benkyou.srsservice.dao.DeckDao;
 import net.mattcarpenter.benkyou.srsservice.entity.CardEntity;
@@ -10,10 +9,13 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.*;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

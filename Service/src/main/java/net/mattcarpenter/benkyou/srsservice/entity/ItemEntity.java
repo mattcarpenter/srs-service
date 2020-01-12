@@ -19,4 +19,6 @@ public class ItemEntity extends EntityWithUUID {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_field"))
     private List<FieldEntity> fieldEntities;
+
+    
 }

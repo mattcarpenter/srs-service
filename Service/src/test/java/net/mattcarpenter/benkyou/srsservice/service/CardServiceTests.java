@@ -10,6 +10,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,6 +36,13 @@ public class CardServiceTests {
         CardEntity card = new CardEntity();
         when(cardDao.findById(id)).thenReturn(Optional.of(card));
         assertThat(cardService.getCard(id)).isEqualTo(card);
+    }
+
+    @Test
+    public void getAllCards_ok() {
+        CardEntity card = new CardEntity();
+        when(cardDao.findAll()).thenReturn(Collections.singletonList(card));
+        assertThat(cardService.getAllCards()).containsExactly(card);
     }
 
     @Test

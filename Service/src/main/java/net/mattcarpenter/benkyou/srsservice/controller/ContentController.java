@@ -2,12 +2,10 @@ package net.mattcarpenter.benkyou.srsservice.controller;
 
 import net.mattcarpenter.benkyou.srsservice.entity.CardEntity;
 import net.mattcarpenter.benkyou.srsservice.entity.DeckEntity;
-import net.mattcarpenter.benkyou.srsservice.entity.ItemEntity;
 import net.mattcarpenter.benkyou.srsservice.mapper.EntityToModelMapper;
 import net.mattcarpenter.benkyou.srsservice.model.*;
 import net.mattcarpenter.benkyou.srsservice.service.CardService;
 import net.mattcarpenter.benkyou.srsservice.service.DeckService;
-import net.mattcarpenter.benkyou.srsservice.service.ItemService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,35 +16,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/content")
 public class ContentController {
 
-    private ItemService itemService;
     private DeckService deckService;
     private CardService cardService;
 
-    public ContentController(ItemService itemService, DeckService deckService, CardService cardService) {
-        this.itemService = itemService;
+    public ContentController(DeckService deckService, CardService cardService) {
         this.deckService = deckService;
         this.cardService = cardService;
-    }
-
-    @GetMapping("/items")
-    public AllItemsResponse getAllItems() {
-        List<ItemModel> items = itemService.getAllItems()
-                .stream()
-                .map(EntityToModelMapper::mapToItemModel)
-                .collect(Collectors.toList());
-
-        return new AllItemsResponse(items);
-    }
-
-    @GetMapping("/items/{id}")
-    public ItemEntity getItemById(@PathVariable String id) {
-        return itemService.getItem(UUID.fromString(id));
-    }
-
-    @PostMapping("/items")
-    public ItemEntity createItem(@RequestBody ItemEntity itemEntity) {
-        itemService.createItem(itemEntity);
-        return itemEntity;
     }
 
     @GetMapping("/cards")
@@ -61,7 +36,7 @@ public class ContentController {
 
     @PostMapping("/cards")
     public CardEntity createCard(@RequestBody CreateCardRequest createCardRequest) {
-        return cardService.createCard(createCardRequest.getItemId());
+        return cardService.createCard();
     }
 
     @GetMapping("/decks")

@@ -20,9 +20,5 @@ public class CardEntity {
     @Type(type = "pg-uuid")
     private UUID id = UUID.randomUUID();
 
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_card_item"))
-    private ItemEntity itemEntity;
-
     private UUID createdBy;
 }

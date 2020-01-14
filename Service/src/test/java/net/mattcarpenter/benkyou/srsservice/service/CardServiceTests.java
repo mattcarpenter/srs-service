@@ -1,9 +1,7 @@
 package net.mattcarpenter.benkyou.srsservice.service;
 
 import net.mattcarpenter.benkyou.srsservice.dao.CardDao;
-import net.mattcarpenter.benkyou.srsservice.dao.ItemDao;
 import net.mattcarpenter.benkyou.srsservice.entity.CardEntity;
-import net.mattcarpenter.benkyou.srsservice.entity.ItemEntity;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -20,14 +18,13 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class CardServiceTests {
-    private CardDao cardDao = Mockito.mock(CardDao.class);
-    private ItemDao itemDao = Mockito.mock(ItemDao.class);
 
+    private CardDao cardDao = Mockito.mock(CardDao.class);
     private CardService cardService;
 
     @Before
     public void before() {
-        cardService = new CardService(cardDao, itemDao);
+        cardService = new CardService(cardDao);
     }
 
     @Test
@@ -48,10 +45,8 @@ public class CardServiceTests {
     @Test
     public void createCard_createsCard() {
         ArgumentCaptor<CardEntity> captor = ArgumentCaptor.forClass(CardEntity.class);
-        ItemEntity itemEntity = new ItemEntity();
-        when(itemDao.findById(itemEntity.getId())).thenReturn(Optional.of(itemEntity));
-        cardService.createCard(itemEntity.getId());
+        cardService.createCard();
         verify(cardDao).save(captor.capture());
-        assertThat(captor.getValue().getItemEntity().getId()).isEqualTo(itemEntity.getId());
+        // todo: assertion
     }
 }

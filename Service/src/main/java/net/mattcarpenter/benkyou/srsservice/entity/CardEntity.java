@@ -8,17 +8,31 @@ import net.mattcarpenter.benkyou.srsservice.entity.util.EntityWithUUID;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity(name = "Card")
 @Data
 public class CardEntity {
 
-    // HashSet will not store 2+ CardEntities unless we either define id on this class (instead of extending
-    // EntityWithUUID) or overriding Equals and HashCode.
     @Id
     @Type(type = "pg-uuid")
     private UUID id = UUID.randomUUID();
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private LayoutEntity layout;
+
+    public LayoutEntity getLayout() {
+        return this.layout;
+    }
+
+    @OneToMany
+    private Set<CardFieldEntity> fields = new HashSet<>();
+
+    public void addField(CardFieldEntity field) {
+        fields.add(field);
+    }
 
     private UUID createdBy;
 }

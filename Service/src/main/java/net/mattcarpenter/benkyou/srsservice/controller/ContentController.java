@@ -36,7 +36,7 @@ public class ContentController {
 
     @PostMapping("/cards")
     public CardEntity createCard(@RequestBody CreateCardRequest createCardRequest) {
-        return cardService.createCard();
+        return cardService.createCard(createCardRequest.getLayoutId(), createCardRequest.getFields());
     }
 
     @GetMapping("/decks")

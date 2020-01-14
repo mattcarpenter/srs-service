@@ -3,9 +3,11 @@ package net.mattcarpenter.benkyou.srsservice.entity;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,6 +19,15 @@ public class LayoutEntity {
     @Type(type = "pg-uuid")
     private UUID id = UUID.randomUUID();
 
-    @OneToMany
-    private Set<LayoutFieldEntity> fields;
+    @OneToMany(
+            mappedBy = "layout",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<LayoutFieldEntity> fields = new HashSet<>();
+
+    public void addField(LayoutFieldEntity field) {
+        fields.add(field);
+        field.setLayout(this);
+    }
 }

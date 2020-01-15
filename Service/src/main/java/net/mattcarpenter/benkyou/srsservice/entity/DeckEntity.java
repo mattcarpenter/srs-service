@@ -3,7 +3,7 @@ package net.mattcarpenter.benkyou.srsservice.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.mattcarpenter.benkyou.srsservice.entity.util.EntityWithUUID;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,7 +14,12 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeckEntity extends EntityWithUUID {
+public class DeckEntity {
+
+    @Id
+    @Type(type = "pg-uuid")
+    public UUID id;
+
     private String title;
     private UUID createdBy;
 

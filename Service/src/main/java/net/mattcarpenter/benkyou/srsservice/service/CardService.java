@@ -66,4 +66,8 @@ public class CardService {
     public List<CardEntity> getAllCards() {
         return Lists.newArrayList(cardDao.findAll());
     }
+
+    public void deleteCard(UUID id) {
+        cardDao.deleteById(id);
+    }
 }

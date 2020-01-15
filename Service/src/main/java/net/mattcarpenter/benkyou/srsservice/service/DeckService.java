@@ -43,4 +43,24 @@ public class DeckService {
         deckDao.save(deck);
         return deck;
    }
+
+   public DeckEntity removeCardFromDeck(UUID deckId, UUID cardId) {
+        DeckEntity deck = getDeck(deckId);
+        Optional<CardEntity> cardToRemove = deck.getCardEntities().stream()
+                .filter(card -> cardId.equals(card.getId()))
+                .findFirst();
+
+        if (cardToRemove.isPresent()) {
+            deck.removeCard(cardToRemove.get());
+        } else {
+            throw new RuntimeException("Card not present on the provided deck or card does not exist.");
+        }
+
+        deckDao.save(deck);
+        return deck;
+   }
+
+   public void deleteDeck(UUID id) {
+        deckDao.deleteById(id);
+   }
 }

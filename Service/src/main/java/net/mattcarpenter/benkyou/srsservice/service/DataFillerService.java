@@ -25,7 +25,7 @@ public class DataFillerService {
         this.layoutFieldDao = layoutFieldDao;
     }
 
-    @PostConstruct
+    //@PostConstruct
     @Transactional
     public void fillData () throws Exception {
         ObjectMapper mapper = new ObjectMapper();

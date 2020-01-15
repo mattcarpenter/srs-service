@@ -24,7 +24,11 @@ public class DeckEntity extends EntityWithUUID {
             inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id"))
     private Set<CardEntity> cardEntities = new HashSet<>();
 
-    public void addCard(CardEntity cardEntity) {
-        cardEntities.add(cardEntity);
+    public void addCard(CardEntity card) {
+        cardEntities.add(card);
+    }
+
+    public void removeCard(CardEntity card) {
+        cardEntities.remove(card);
     }
 }

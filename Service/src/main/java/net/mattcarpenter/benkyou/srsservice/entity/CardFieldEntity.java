@@ -1,5 +1,6 @@
 package net.mattcarpenter.benkyou.srsservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Type;
@@ -21,6 +22,7 @@ public class CardFieldEntity {
 
     private String value;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private CardEntity card;
 

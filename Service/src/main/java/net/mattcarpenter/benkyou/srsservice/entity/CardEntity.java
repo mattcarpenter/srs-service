@@ -1,5 +1,6 @@
 package net.mattcarpenter.benkyou.srsservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
@@ -17,6 +18,7 @@ public class CardEntity {
     private UUID id = UUID.randomUUID();
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private LayoutEntity layout;
 
     @OneToMany(

@@ -30,4 +30,14 @@ public class LayoutEntity {
         fields.add(field);
         field.setLayout(this);
     }
+
+    public void removeField(LayoutFieldEntity field) {
+        fields.remove(field);
+    }
+
+    private String frontHtml;
+    private String backHtml;
+    private String frontCss;
+    private String backCss;
+    private String name;
 }

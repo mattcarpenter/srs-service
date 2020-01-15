@@ -33,14 +33,14 @@ public class ContentController {
         return new AllCardsResponse(cardService.getAllCards());
     }
 
-    @GetMapping("/cards/{id}")
-    public CardEntity getCard(@PathVariable UUID id) {
-        return cardService.getCard(id);
+    @GetMapping("/cards/{cardId}")
+    public CardEntity getCard(@PathVariable UUID cardId) {
+        return cardService.getCard(cardId);
     }
 
-    @DeleteMapping("/cards/{id}")
-    public void deleteCard(@PathVariable UUID id) {
-        cardService.deleteCard(id);
+    @DeleteMapping("/cards/{cardId}")
+    public void deleteCard(@PathVariable UUID cardId) {
+        cardService.deleteCard(cardId);
     }
 
     @PostMapping("/cards")
@@ -63,28 +63,33 @@ public class ContentController {
         return deckService.createDeck(createDeckRequest.getTitle());
     }
 
-    @GetMapping("/decks/{id}")
-    public DeckEntity getDeck(@PathVariable UUID id) {
-        return deckService.getDeck(id);
+    @GetMapping("/decks/{deckId}")
+    public DeckEntity getDeck(@PathVariable UUID deckId) {
+        return deckService.getDeck(deckId);
     }
 
-    @DeleteMapping("/decks/{id}")
-    public void deleteDeck(@PathVariable UUID id) {
-        deckService.deleteDeck(id);
+    @DeleteMapping("/decks/{deckId}")
+    public void deleteDeck(@PathVariable UUID deckId) {
+        deckService.deleteDeck(deckId);
     }
 
-    @PostMapping("/decks/{id}/cards")
-    public DeckEntity addCardsToDeck(@PathVariable UUID id, @RequestBody AddCardsToDeckRequest addCardsToDeckRequest) {
-        deckService.addCardsToDeck(id, addCardsToDeckRequest.getCardIds());
-        return deckService.getDeck(id);
+    @PostMapping("/decks/{deckId}/cards")
+    public DeckEntity addCardsToDeck(@PathVariable UUID deckId, @RequestBody AddCardsToDeckRequest addCardsToDeckRequest) {
+        deckService.addCardsToDeck(deckId, addCardsToDeckRequest.getCardIds());
+        return deckService.getDeck(deckId);
     }
 
-    @DeleteMapping("/decks/{id}/cards/{id}")
+    @DeleteMapping("/decks/{deckId}/cards/{cardId}")
     public DeckEntity removeCardFromDeck(@PathVariable UUID deckId, @PathVariable UUID cardId) {
         return deckService.removeCardFromDeck(deckId, cardId);
     }
 
-    @PostMapping("/layouts/")
+    @GetMapping("/layouts")
+    public AllLayoutsResponse getAllLayouts() {
+        return new AllLayoutsResponse(layoutService.getAllLayouts());
+    }
+
+    @PostMapping("/layouts")
     public LayoutEntity createLayout(@RequestBody CreateLayoutRequest createLayoutRequest) {
         return layoutService.createLayout(
                 createLayoutRequest.getName(),
@@ -96,9 +101,9 @@ public class ContentController {
         );
     }
 
-    @GetMapping("/layouts/{id}")
-    public LayoutEntity getLayout(@PathVariable UUID id) {
-        return layoutService.getLayout(id);
+    @GetMapping("/layouts/{layoutId}")
+    public LayoutEntity getLayout(@PathVariable UUID layoutId) {
+        return layoutService.getLayout(layoutId);
     }
 
     @PostMapping("/layouts/{layoutId}/fields/")
@@ -111,8 +116,8 @@ public class ContentController {
         return layoutService.deleteField(layoutId, fieldName);
     }
 
-    @DeleteMapping("/layouts/{id}")
-    public void deleteLayout(@PathVariable UUID id) {
-        layoutService.deleteLayout(id);
+    @DeleteMapping("/layouts/{layoutId}")
+    public void deleteLayout(@PathVariable UUID layoutId) {
+        layoutService.deleteLayout(layoutId);
     }
 }

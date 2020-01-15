@@ -1,5 +1,6 @@
 package net.mattcarpenter.benkyou.srsservice.service;
 
+import com.google.common.collect.Lists;
 import net.mattcarpenter.benkyou.srsservice.dao.LayoutDao;
 import net.mattcarpenter.benkyou.srsservice.entity.LayoutEntity;
 import net.mattcarpenter.benkyou.srsservice.entity.LayoutFieldEntity;
@@ -70,5 +71,9 @@ public class LayoutService {
 
     public void deleteLayout(UUID id) {
         layoutDao.deleteById(id);
+    }
+
+    public List<LayoutEntity> getAllLayouts() {
+        return Lists.newArrayList(layoutDao.findAll());
     }
 }

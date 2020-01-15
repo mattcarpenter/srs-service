@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -71,6 +72,36 @@ public class DeckServiceTests {
         deckService.createDeck("Test deck");
         verify(deckDao).save(captor.capture());
         assertThat(captor.getValue().getTitle()).isEqualTo("Test deck");
+    }
+
+    @Test
+    public void deleteDeck_ok() {
+        UUID deckId = UUID.randomUUID();
+        ArgumentCaptor<UUID> captor = ArgumentCaptor.forClass(UUID.class);
+        deckService.deleteDeck(deckId);
+        verify(deckDao).deleteById(captor.capture());
+        assertThat(captor.getValue().equals(deckId));
+    }
+
+    @Test
+    public void removeCardFromDeck_ok() {
+        DeckEntity deck = new DeckEntity();
+        CardEntity card = new CardEntity();
+        deck.addCard(card);
+        assertThat(deck.getCardEntities().size()).isEqualTo(1);
+        when(deckDao.findById(deck.getId())).thenReturn(Optional.of(deck));
+        ArgumentCaptor<DeckEntity> captor = ArgumentCaptor.forClass(DeckEntity.class);
+        deckService.removeCardFromDeck(deck.getId(), card.getId());
+        verify(deckDao).save(captor.capture());
+        assertThat(captor.getValue().getCardEntities().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void removeCardFromDeck_throwsWhenCardInvalid() {
+        DeckEntity deck = new DeckEntity();
+        CardEntity card = new CardEntity();
+        when(deckDao.findById(deck.getId())).thenReturn(Optional.of(deck));
+        assertThatThrownBy(() -> deckService.removeCardFromDeck(deck.getId(), card.getId()));
     }
 }
 

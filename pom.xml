@@ -12,7 +12,16 @@
 		<version>2.2.2.RELEASE</version>
 	</parent>
 	<modules>
+		<module>Commons</module>
 		<module>Service</module>
 		<module>FunctionalTests</module>
 	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.10</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 </project>

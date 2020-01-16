@@ -6,12 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="srs-service-commons" />
         <module name="srs-service" />
         <module name="srs-service-functional-tests" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="srs-service" target="13" />
+      <module name="srs-service-commons" target="1.8" />
       <module name="srs-service-functional-tests" target="1.8" />
       <module name="srs-service-parent" target="1.8" />
     </bytecodeTargetLevel>
@@ -19,6 +21,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="srs-service" options="-parameters" />
+      <module name="srs-service-commons" options="-parameters" />
       <module name="srs-service-functional-tests" options="-parameters" />
     </option>
   </component>

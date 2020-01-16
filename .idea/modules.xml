@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Service/srs-service.iml" filepath="$PROJECT_DIR$/Service/srs-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Commons/srs-service-commons.iml" filepath="$PROJECT_DIR$/Commons/srs-service-commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/FunctionalTests/srs-service-functional-tests.iml" filepath="$PROJECT_DIR$/FunctionalTests/srs-service-functional-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/srs-service-parent.iml" filepath="$PROJECT_DIR$/srs-service-parent.iml" />
     </modules>

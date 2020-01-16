@@ -9,7 +9,6 @@
 	</parent>
 	<groupId>net.mattcarpenter.benkyou</groupId>
 	<artifactId>srs-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<description>SRS Service</description>
 
@@ -38,12 +37,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.10</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -99,6 +92,11 @@
 			<artifactId>assertj-core</artifactId>
 			<version>3.14.0</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.mattcarpenter.benkyou</groupId>
+			<artifactId>srs-service-commons</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -38,11 +38,30 @@ public class LayoutTests extends TestBase {
         String layoutId = createResponse.getBody().path("id");
 
         // call get-layout endpoint with the id of the newly minted layout
-        Response getResponse = RestAssured.given().get(
-                getProperty(TestConstants.BASE_URL) + String.format(TestConstants.LAYOUTS_RESOURCE_PATH_TEMPLATE, layoutId));
+        Response getResponse = getTestLayout(layoutId);
 
         // assertions
         assertTestLayout(getResponse);
+    }
+
+    @Test
+    public void getLayout_invalidLayoutId() {
+        Response response = getTestLayout("fake-layout-id");
+        response.then().assertThat().statusCode(400); // TODO - Fix error responses!
+    }
+
+    @Test
+    public void deleteLayout_deletesLayout() {
+
+        // create a test layout and obtain its id
+        Response createResponse = createTestLayout();
+        String layoutId = createResponse.getBody().path("id");
+
+        // delete the layout
+        deleteTestLayout(layoutId).then().assertThat().statusCode(200);
+
+        // expect get to fail
+        getTestLayout(layoutId).then().assertThat().statusCode(500); // TODO - Fix error responses!
     }
 
     private Response createTestLayout() {
@@ -71,5 +90,15 @@ public class LayoutTests extends TestBase {
                 .body("name", equalTo("foo"))
                 .body("fields", hasItems(hasEntry("name", "english")))
                 .body("fields", hasItems(hasEntry("name", "hiragana")));
+    }
+
+    private Response deleteTestLayout(String layoutId) {
+        return RestAssured.given().delete(
+                getProperty(TestConstants.BASE_URL) + String.format(TestConstants.LAYOUTS_RESOURCE_PATH_TEMPLATE, layoutId));
+    }
+
+    private Response getTestLayout(String layoutId) {
+        return RestAssured.given().get(
+                getProperty(TestConstants.BASE_URL) + String.format(TestConstants.LAYOUTS_RESOURCE_PATH_TEMPLATE, layoutId));
     }
 }

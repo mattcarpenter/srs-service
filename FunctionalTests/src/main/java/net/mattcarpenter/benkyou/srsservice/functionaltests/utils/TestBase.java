@@ -1,5 +1,8 @@
 package net.mattcarpenter.benkyou.srsservice.functionaltests.utils;
 
+import net.mattcarpenter.benkyou.srsservice.functionaltests.constants.TestConstants;
+import net.mattcarpenter.benkyou.srsservice.functionaltests.helpers.CardHelper;
+import net.mattcarpenter.benkyou.srsservice.functionaltests.helpers.LayoutHelper;
 import org.testng.annotations.BeforeClass;
 
 import java.io.FileNotFoundException;
@@ -13,8 +16,12 @@ public class TestBase {
     private static final String DEFAULT_ENV = "dev";
     private static final String SYSTEM_PROPERTY_ENV = "env";
 
+    public LayoutHelper layoutHelper;
+    public CardHelper cardHelper;
+
     @BeforeClass
     public void before() throws Exception {
+
         if (properties != null) {
             return;
         }
@@ -27,6 +34,9 @@ public class TestBase {
         } else {
             throw new FileNotFoundException("property file '" + PROPERTIES_FILE + "' not found in the classpath");
         }
+
+        layoutHelper = new LayoutHelper(getProperty(TestConstants.BASE_URL));
+        cardHelper = new CardHelper(getProperty(TestConstants.BASE_URL));
     }
 
     protected String getProperty(String propertyName) {

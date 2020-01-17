@@ -4,12 +4,14 @@ import com.google.common.collect.Lists;
 import net.mattcarpenter.benkyou.srsservice.dao.LayoutDao;
 import net.mattcarpenter.benkyou.srsservice.entity.LayoutEntity;
 import net.mattcarpenter.benkyou.srsservice.entity.LayoutFieldEntity;
+import net.mattcarpenter.benkyou.srsservice.exception.NotFoundException;
 import net.mattcarpenter.benkyou.srsservice.mapper.ModelToEntityMapper;
 import net.mattcarpenter.benkyou.srsservice.model.LayoutFieldModel;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -40,7 +42,11 @@ public class LayoutService {
     }
 
     public LayoutEntity getLayout(UUID id) {
-        return layoutDao.findById(id).orElseThrow();
+        try {
+            return layoutDao.findById(id).orElseThrow();
+        } catch(NoSuchElementException ex) {
+            throw new NotFoundException("The requested layout could not be found");
+        }
     }
 
     public LayoutEntity createFieldOnLayout(UUID layoutId, String fieldName) {

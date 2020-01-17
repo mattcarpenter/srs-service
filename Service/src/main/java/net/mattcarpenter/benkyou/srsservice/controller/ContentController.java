@@ -30,12 +30,14 @@ public class ContentController {
 
     @GetMapping("/cards")
     public AllCardsResponse getAllCards() {
-        return new AllCardsResponse(cardService.getAllCards());
+        return new AllCardsResponse(
+                cardService.getAllCards().stream().map(EntityToModelMapper::mapToCardModel).collect(Collectors.toList())
+        );
     }
 
     @GetMapping("/cards/{cardId}")
-    public CardEntity getCard(@PathVariable UUID cardId) {
-        return cardService.getCard(cardId);
+    public CardModel getCard(@PathVariable UUID cardId) {
+        return EntityToModelMapper.mapToCardModel(cardService.getCard(cardId));
     }
 
     @DeleteMapping("/cards/{cardId}")
@@ -44,8 +46,10 @@ public class ContentController {
     }
 
     @PostMapping("/cards")
-    public CardEntity createCard(@RequestBody CreateCardRequest createCardRequest) {
-        return cardService.createCard(createCardRequest.getLayoutId(), createCardRequest.getFields());
+    public CardModel createCard(@RequestBody CreateCardRequest createCardRequest) {
+        return EntityToModelMapper.mapToCardModel(
+                cardService.createCard(createCardRequest.getLayoutId(), createCardRequest.getFields())
+        );
     }
 
     @GetMapping("/decks")

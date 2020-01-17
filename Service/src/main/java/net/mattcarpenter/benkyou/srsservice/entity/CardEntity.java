@@ -2,6 +2,8 @@ package net.mattcarpenter.benkyou.srsservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -26,6 +28,7 @@ public class CardEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @Fetch(FetchMode.JOIN)
     private Set<CardFieldEntity> fields = new HashSet<>();
 
     public void addField(CardFieldEntity field) {

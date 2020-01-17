@@ -20,12 +20,13 @@ public class CardFieldEntity {
     @Type(type = "pg-uuid")
     private UUID id = UUID.randomUUID();
 
+    private String name;
     private String value;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private CardEntity card;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private LayoutFieldEntity layoutField;
+    /*@ManyToOne(fetch = FetchType.LAZY)
+    private LayoutFieldEntity layoutField;*/
 }

@@ -77,7 +77,7 @@ public class CardServiceTests {
         verify(cardDao).save(cardCaptor.capture());
 
         assertThat(cardFieldCaptor.getValue().getValue()).isEqualTo("にほん");
-        assertThat(cardFieldCaptor.getValue().getLayoutField().getName()).isEqualTo("hiragana");
+        //assertThat(cardFieldCaptor.getValue().getLayoutField().getName()).isEqualTo("hiragana");
         assertThat(cardCaptor.getValue().getFields().size()).isEqualTo(1);
     }
 

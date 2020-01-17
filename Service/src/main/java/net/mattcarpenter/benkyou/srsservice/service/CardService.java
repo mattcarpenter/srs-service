@@ -42,12 +42,14 @@ public class CardService {
         cardFields.forEach(cardField -> {
             CardFieldEntity cardFieldEntity = new CardFieldEntity();
             cardFieldEntity.setValue(cardField.getValue());
+            cardFieldEntity.setName(cardField.getName());
+
             Optional<LayoutFieldEntity> layoutFieldEntity = layoutFields.stream()
                     .filter(field -> field.getName().equals(cardField.getName()))
                     .findFirst();
 
             if (layoutFieldEntity.isPresent()) {
-                cardFieldEntity.setLayoutField(layoutFieldEntity.get());
+                //cardFieldEntity.setLayoutField(layoutFieldEntity.get());
                 cardFieldDao.save(cardFieldEntity);
                 cardEntity.addField(cardFieldEntity);
             } else {
